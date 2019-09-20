@@ -1,4 +1,4 @@
-import math
+
 // single-line comments start with a //
 
 /*
@@ -23,7 +23,7 @@ import math
 
         Note from the Developer: Unlike C and Go, int is always 32 bits
 */
-
+import math // ignore this for now we'll talk about it later
 // program constants are defined at the module level (External to any functions) and are denoted by the 'const' structure
 const (
     Hello = 'hello'
@@ -58,33 +58,29 @@ const (
     There can be multiple constant declarations throughout source code; 
     although it is recommended to declare as many as possible in the same area 
 */
-    
-    
+        
 /* 
     Function declarations follow many other languages' form:
     
     fn function_name(param_list) return_type {
         function_body
     }
-    
-    A function can be used before their declaration to alleviate the need for header files
 */
 
-//You can declare parameters individually
+// You can declare parameters individually
 fn test_address(street string, city string, state string, zip int) Address {
     return Address{street : street, city : city, state : state, zip : zip}
 }
 
 // or they can be grouped by type
-fn test_address2(street, city, state string, zip int) Address{
+fn test_address2(street, city, state string, zip int) Address {
     return Address{street : street, city : city, state : state, zip : zip}
 }
-    
     
 const (
     Address1 = test_address('2718 Tau Dr', 'Turing', 'Leibniz', 54366)
     Address2 = test_address2('3142 Uat Rd', 'Einstein', 'Maxwell', 62840)
-)    
+)
 
 /*
     Structs have special functions called methods. They are like regular functions with the addition of having a special receiver argument.
@@ -96,34 +92,54 @@ fn (a Address) str() string {
     return 'Address.str(): $a.street, $a.city, $a.state $a.zip'
 }
 
-
 struct Point {
     x_coor int
     y_coor int
 }
 
-fn (p Point) dist(p1, p2 Point) string {
+fn test_out_of_order_calls() {
     // unlike most languages, variables can only be defined in a function scope
-    x_diff_immutable := p2.x_coor - p1.x_coor
+    point := Point{x_coor : 2, y_coor : 2}
     // Variable are immutable by default
-    // x_diff_immutable = 2 would cause a compile error (test it, I'll wait ;] )
-    
-    mut y_diff_mutable := p2.y_coor - p1.y_coor
-    y_diff_mutable = 3 //should work fine
-    // as you've realized now, the mut keyword denotes that a variable should be mutable
-    
-   // y_diff_mutable = math.pow(y_diff_mutable, 2)
-    return '$x_diff_immutable, $y_diff_mutable'
+    mut point1 := Point{}
+    // := is used for initialization, = is an assignment
+    point1 = Point{x_coor : 1, y_coor : 1}    
+    // A function can be used before their declaration to alleviate the need for header files
+    println(point.dist(point1))
 }
 
-println('$Hello $World, you are $AgeOfWorld days old.')
+fn (p Point) dist(p2 Point) string {  
+    // you can perform conversion with the T(v) form
+    // the following is int => f64 using the form f64(int)
+    x_diff_immutable := f64(p2.x_coor - p.x_coor)    
+    // x_diff_immutable = 2 would cause a compile error (test it, I'll wait ;] )    
+    mut y_diff_mutable := f64(p2.y_coor - p.y_coor)
+    // as you've realized now, the mut keyword denotes that a variable should be mutable    
+    mut distance := math.pow(x_diff_immutable, 2)    
+    y_diff_mutable = math.pow(y_diff_mutable, 2)    
+    // that allows us assign a new value to a variable after it's initialized
+    distance = distance + y_diff_mutable    
+    distance = math.sqrt(distance)
+    // you could obviously do : distance = math.sqrt(distance + y_diff_mutable)
+    return 'difference in:\nx_coors = $x_diff_immutable, y_coors = $y_diff_mutable\nthe distance between them is ${distance:.2f}'
+}
 
-println(Streets)
-println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
-println('$TestAddress2.street, $TestAddress2.city, $TestAddress2.state')
-println(Address1.str())
-println(Address2.str())
+fn string_example(){
+    // a char is denoted by a set of backticks ( ` )  (on many PCs this is the key under escape)
+    a_char := `a`
+    // you've seen examples, but interpolated strings 
+}
 
 
 
+fn main(){
+    println('$Hello $World, you are $AgeOfWorld days old.')
+    println(Streets)
+    println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
+    println('$TestAddress2.street, $TestAddress2.city, $TestAddress2.state')
+    println(Address1.str())
+    println(Address2.str())
+    test_out_of_order_calls()
+    string_example()
+}
 
