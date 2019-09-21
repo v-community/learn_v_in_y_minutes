@@ -2,21 +2,17 @@
 // single-line comments start with a //
 
 /*
-    multi-line comments start with a /*
-    
+    multi-line comments start with a /*    
     and they can be nested */
 */
 
 /*
     V's basic data types include:
         bool                            - true/false
-        string                          - 'hello'
-
+        string                          - 'hello' *utf-8 encoded*
         i8 i16 int i64 i128[WIP]        - signed integers of 8, 16, 32, 64, and 128 bits
         byte u16 u32 u64 u128[WIP]      - unsigned integers of 8, 16, 32, 64, and 128 bits
-
         f32 f64                         - floating point numbers of 32 and 64 bits
-
         rune                            - unicode code point (unicode equivalent of an ascii char)
         byteptr
         voidptr    
@@ -60,11 +56,10 @@ const (
 */
         
 /* 
-    Function declarations follow many other languages' form:
-    
-    fn function_name(param_list) return_type {
-        function_body
-    }
+    Function declarations follow many other languages' form:    
+        fn function_name(param_list) return_type {
+            function_body
+        }
 */
 
 // You can declare parameters individually
@@ -83,8 +78,7 @@ const (
 )
 
 /*
-    Structs have special functions called methods. They are like regular functions with the addition of having a special receiver argument.
-    
+    Structs have special functions called methods. They are like regular functions with the addition of having a special receiver argument.    
     Conventionally, the parameter name for the receiver should be short (preferably single letter)
 */
 
@@ -127,19 +121,56 @@ fn (p Point) dist(p2 Point) string {
 fn string_example(){
     // a char is denoted by a set of backticks ( ` )  (on many PCs this is the key under escape)
     a_char := `a`
-    // you've seen examples, but interpolated strings 
+    // you've seen examples, but interpolated strings are readily available 
+    println('The ascii value of this char is: $a_char')
+    // basic value can be interpolated directly,
+    // more advanced interpolations require {}
+    println('The char is: ${a_char.str()}')
+    // if you prefer, concatenation is always available
+    mut concat := 'b'+a_char.str()+'dnews be'+a_char.str()+'rs'
+    println(concat)
+    // use += to append to a string
+    concat += '_appended'
+    println(concat)
+}
+
+fn arrays_example(){
+    // arrays are collections of a SINGLE data type
+    mut fruits := ['apple', 'banana', 'cherry']
+    // the data type is determined by the type of the first element that it contains
+    println(fruits)
+    // use << to append to the end 
+    fruits << 'kiwi'
+    println(fruits)
+    // arrays can be pre-allocated
+    ben_10 := ['ben'].repeat(10)
+    // use .len to get the number of elements in an array
+    // use array_name[desired_index] to get the element at a specific index (indices start at 0)
+    println('There are ${ben_10.len} occurrences of ${ben_10[0]} in \n'+ben_10.str())
 }
 
 
-
-fn main(){
-    println('$Hello $World, you are $AgeOfWorld days old.')
-    println(Streets)
-    println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
-    println('$TestAddress2.street, $TestAddress2.city, $TestAddress2.state')
-    println(Address1.str())
-    println(Address2.str())
-    test_out_of_order_calls()
-    string_example()
-}
+println('$Hello $World, you are $AgeOfWorld days old.')
+println(Streets)
+println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
+println('$TestAddress2.street, $TestAddress2.city, $TestAddress2.state')
+println(Address1.str())
+println(Address2.str())
+test_out_of_order_calls()
+string_example()
+arrays_example()
+    
+/* Single File programs can do without a main program as an entry point
+    fn main(){
+        println('$Hello $World, you are $AgeOfWorld days old.')
+        println(Streets)
+        println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
+        println('$TestAddress2.street, $TestAddress2.city, $TestAddress2.state')
+        println(Address1.str())
+        println(Address2.str())
+        test_out_of_order_calls()
+        string_example()
+        arrays_example()
+    }
+*/
 
