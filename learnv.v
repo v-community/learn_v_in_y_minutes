@@ -1,4 +1,3 @@
-
 // single-line comments start with a //
 
 /*
@@ -53,9 +52,7 @@ const (
 /* 
     There can be multiple constant declarations throughout source code; 
     although it is recommended to declare as many as possible in the same area 
-*/
-        
-/* 
+    
     Function declarations follow many other languages' form:    
         fn function_name(param_list) return_type {
             function_body
@@ -79,7 +76,7 @@ const (
 
 /*
     Structs have special functions called methods. They are like regular functions with the addition of having a special receiver argument.    
-    Conventionally, the parameter name for the receiver should be short (preferably single letter)
+    Conventionally, the parameter name for the receiver should be short (typically a single letter)
 */
 
 fn (a Address) str() string {
@@ -94,7 +91,7 @@ struct Point {
 fn test_out_of_order_calls() {
     // unlike most languages, variables can only be defined in a function scope
     point := Point{x_coor : 2, y_coor : 2}
-    // Variable are immutable by default
+    // Variables are immutable by default
     mut point1 := Point{}
     // := is used for initialization, = is an assignment
     point1 = Point{x_coor : 1, y_coor : 1}    
@@ -103,7 +100,7 @@ fn test_out_of_order_calls() {
 }
 
 fn (p Point) dist(p2 Point) string {  
-    // you can perform conversion with the T(v) form
+    // you can perform type conversion with the T(v) form
     // the following is int => f64 using the form f64(int)
     x_diff_immutable := f64(p2.x_coor - p.x_coor)    
     // x_diff_immutable = 2 would cause a compile error (test it, I'll wait ;] )    
@@ -111,7 +108,7 @@ fn (p Point) dist(p2 Point) string {
     // as you've realized now, the mut keyword denotes that a variable should be mutable    
     mut distance := math.pow(x_diff_immutable, 2)    
     y_diff_mutable = math.pow(y_diff_mutable, 2)    
-    // that allows us assign a new value to a variable after it's initialized
+    // that allows us to assign a new value to a variable after it's initialized
     distance = distance + y_diff_mutable    
     distance = math.sqrt(distance)
     // you could obviously do : distance = math.sqrt(distance + y_diff_mutable)
@@ -123,8 +120,8 @@ fn string_example(){
     a_char := `a`
     // you've seen examples, but interpolated strings are readily available 
     println('The ascii value of this char is: $a_char')
-    // basic value can be interpolated directly,
-    // more advanced interpolations require {}
+    // basic values can be interpolated directly,
+    // more advanced interpolations require ${to_be_interpolated}
     println('The char is: ${a_char.str()}')
     // if you prefer, concatenation is always available
     mut concat := 'b'+a_char.str()+'dnews be'+a_char.str()+'rs'
@@ -149,6 +146,29 @@ fn arrays_example(){
     println('There are ${ben_10.len} occurrences of ${ben_10[0]} in \n'+ben_10.str())
 }
 
+fn maps_example() {
+    // maps function like dictionaries from many other languages
+    mut my_dict := map[string]f64 // Currently, they only accept keys that are strings
+    my_dict['pi'] = 3.14
+    my_dict['tau'] = 6.28 // but any type can be used as a value
+    my_dict['e'] = 2.72
+    
+    println(my_dict.str())
+    // if you know all the key-value pairs, thif64s alternative declaration form may come in hand
+    alt_dict := {'a' : 'alpha', 'b' : 'beta', 'c' : 'ga'}
+}
+
+fn (m map[string]f64) str() string {
+    mut result := ''
+    // V has no while loop, for loops have several forms that can be utilized
+        
+    for key, val in m {
+        result += 'key: $key -> value: $val\n'
+    }
+    // this one is very handy for maps or when the index in arrays is needed
+    
+    return result
+}
 
 println('$Hello $World, you are $AgeOfWorld days old.')
 println(Streets)
@@ -159,6 +179,7 @@ println(Address2.str())
 test_out_of_order_calls()
 string_example()
 arrays_example()
+maps_example()
     
 /* Single File programs can do without a main program as an entry point
     fn main(){
