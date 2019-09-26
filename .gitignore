@@ -1,2 +1,5 @@
 learnv
 *.c
+*.txt
+learnv-gcc
+learnv-tcc

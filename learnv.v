@@ -18,7 +18,11 @@
 
         Note from the Developer: Unlike C and Go, int is always 32 bits
 */
-import math // ignore this for now we'll talk about it later
+
+// packages from the standard library and any packages installed through vpm 
+// are loaded at the start of a program
+import math // don't worry about this for now
+    
 // program constants are defined at the module level (External to any functions) and are denoted by the 'const' structure
 const (
     Hello = 'hello'
@@ -26,9 +30,11 @@ const (
     AgeOfWorld = 42
 )
 
-// PascalCase is the preferred typing method for constants
-// const's are more lenient and flexible than in other languages
-// To promote the lack of global variables, complex data types can be created in the consts structure
+/* 
+    PascalCase is the preferred typing method for constants
+    const's are more lenient and flexible than in other languages
+    To promote the lack of global variables, complex data types can be created in the consts structure
+*/
 
 /*
     structs, like in C, allow you define a group of different data-types together in a single, logical type
@@ -42,17 +48,18 @@ struct Address {
         state string
         zip int
 }
-
+/* 
+    There can be multiple constant declarations throughout source code; 
+    although it is recommended to declare as many as possible in the same area 
+*/
 const (
     Streets = ['1234 Alpha Avenue', '9876 Test Lane'] 
     TestAddress = Address {street : Streets[0], city: 'Beta', state : 'Gamma', zip : 31416}
     TestAddress2 = Address {street : Streets[1], city: 'Exam', state : 'Quiz', zip : 62832}
 )
 
-/* 
-    There can be multiple constant declarations throughout source code; 
-    although it is recommended to declare as many as possible in the same area 
-    
+
+/*
     Function declarations follow many other languages' form:    
         fn function_name(param_list) return_type {
             function_body
@@ -75,7 +82,8 @@ const (
 )
 
 /*
-    Structs have special functions called methods. They are like regular functions with the addition of having a special receiver argument.    
+    Structs have special functions called methods. 
+    They are like any regular function with the addition of having a special receiver argument.    
     Conventionally, the parameter name for the receiver should be short (typically a single letter)
 */
 
@@ -115,7 +123,7 @@ fn (p Point) dist(p2 Point) string {
     return 'difference in:\nx_coors = $x_diff_immutable, y_coors = $y_diff_mutable\nthe distance between them is ${distance:.2f}'
 }
 
-fn string_example(){
+fn string_example() {
     // a char is denoted by a set of backticks ( ` )  (on many PCs this is the key under escape)
     a_char := `a`
     // you've seen examples, but interpolated strings are readily available 
@@ -131,7 +139,7 @@ fn string_example(){
     println(concat)
 }
 
-fn arrays_example(){
+fn arrays_example() {
     // arrays are collections of a SINGLE data type
     mut fruits := ['apple', 'banana', 'cherry']
     // the data type is determined by the type of the first element that it contains
@@ -154,14 +162,84 @@ fn maps_example() {
     my_dict['e'] = 2.72
     
     println(my_dict.str())
-    // if you know all the key-value pairs, thif64s alternative declaration form may come in hand
-    alt_dict := {'a' : 'alpha', 'b' : 'beta', 'c' : 'ga'}
+    // if you know some/all of the key-value pairs, this alternative initialization form may come in hand
+    // alt_dict := {'a' : 1.1, 'b' : 2.2, 'c' : 3.3}
+    // println(alt_dict.str())
 }
 
-fn (m map[string]f64) str() string {
+/*
+    Conditionals are extremely useful when needing to check values or the state of your program.
+    The standard if-else suite functions like many other languages:
+    if some_condition {
+        statements to perform when some_condition is true
+    }
+    else if some_other_condition {
+        statements to execute when some_condition is false
+        and some_other_condition is true
+    }
+    else {
+        statements to perform if neither condition is valid
+    }
+*/
+fn conditional_example() {
+    a := 15
+    b := 35
+    
+    // parentheses around the condition can be useful for longer expressions
+    if (b == 2*a) {
+        println('b ($b) is twice the value of a ($a)')
+    }
+    // however they are not required
+    else if a > b {
+        println('a ($a) is greater than b ($b)')
+    }
+    // the curly braces are though
+    else {
+        println('a ($a) is less than or equal to b ($b)')
+    }
+    // if-else suites can be used as an expression and the result stored in a variable
+    mult_of_3 := if a % 3 == 0 {
+        'a ($a) is a multiple of 3'
+    }
+    else {
+        'a ($a) is NOT a multiple of 3'
+    }
+    
+    println(mult_of_3)
+}
+
+fn (m map[string]f64 ) str() string {
     mut result := ''
-    // V has no while loop, for loops have several forms that can be utilized
-        
+    // V has no while loop, for loops have several forms that can be utilized    
+    mut count := 0
+    num_keys := m.size
+       println(num_keys)
+    // the basic for loop will run indefinitely
+    for {
+        count += 2
+            
+        println(num_keys.str())
+        if count == num_keys - 1 {
+            // until it reaches a break statement...or the comp runs out of resources :]
+            break 
+        }
+        else if (count == 6){
+            // continue statements skip to the next iteration of the loop
+            continue
+        }        
+        result += 'Count is $count\n'            
+    }
+    // the more standard for loop is available as well    
+    for i := 1; i <= 10; i++ {
+        if i % 2 == 0 {
+            println('i ($i) is even')
+        }
+    }
+    // the for...in... acts like the foreach of most languages
+    for val in [1,2,3] {
+        result += '$val\n'
+    }
+    // the for key, val in... is a specialized for of the above for maps
     for key, val in m {
         result += 'key: $key -> value: $val\n'
     }
@@ -180,6 +258,7 @@ test_out_of_order_calls()
 string_example()
 arrays_example()
 maps_example()
+conditional_example()
     
 /* Single File programs can do without a main program as an entry point
     fn main(){
