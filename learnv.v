@@ -183,8 +183,7 @@ fn maps_example() {
 */
 fn conditional_example() {
     a := 15
-    b := 35
-    
+    b := 35    
     // parentheses around the condition can be useful for longer expressions
     if (b == 2*a) {
         println('b ($b) is twice the value of a ($a)')
@@ -203,9 +202,50 @@ fn conditional_example() {
     }
     else {
         'a ($a) is NOT a multiple of 3'
+    }    
+    println(mult_of_3)    
+    c := `c`
+    mut x := ''    
+    // a shorthand to if c == `a` is v's match statement
+    // it is similar to many other languages' switch statement
+    match c {
+        `a`=> {
+            println('${c.str()} is for Apple')
+            x += 'Apple'
+        }
+        `b` => {
+            println('${c.str()} is for Banana')
+            x += 'Banana'
+        }
+        `c` => {
+            println('${c.str()} is for Cherry')
+            x += 'Cherry'   
+        }
+        else => {
+            println('NOPE')
+        }
     }
+    println(x)
+}
+
+fn in_example() {
+    arr := [1,2,3,5]
+    x := if 4 in arr {
+            'There was a 4 in the array'
+        }
+        else {
+            'There was not a 4 in the array'
+        }
+    println(x)
     
-    println(mult_of_3)
+    m := {'car' : 'bmw', 'truck' : 'chevrolet', 'plane' : 'sesna'}
+    y := if 'truck' in m {
+            'The manufacturer for trucks that you listed was '+m['truck']
+        }
+        else {
+            'You did not store a manufacturer for trucks'
+        }
+    println(y)
 }
 
 fn (m map[string]f64 ) str() string {
@@ -227,7 +267,7 @@ fn (m map[string]f64 ) str() string {
             // continue statements skip to the next iteration of the loop
             continue
         }        
-        result += 'Count is $count\n'            
+        result += 'Count is $count'            
     }
     // the more standard for loop is available as well    
     for i := 1; i <= 10; i++ {
@@ -237,11 +277,11 @@ fn (m map[string]f64 ) str() string {
     }
     // the for...in... acts like the foreach of most languages
     for val in [1,2,3] {
-        result += '$val\n'
+        result += '$val'
     }
     // the for key, val in... is a specialized for of the above for maps
     for key, val in m {
-        result += 'key: $key -> value: $val\n'
+        result += 'key: $key -> value: $val'
     }
     // this one is very handy for maps or when the index in arrays is needed
     
@@ -259,6 +299,7 @@ string_example()
 arrays_example()
 maps_example()
 conditional_example()
+in_example()
     
 /* Single File programs can do without a main program as an entry point
     fn main(){
