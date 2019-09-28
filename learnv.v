@@ -133,10 +133,10 @@ fn string_example() {
     println('The char is: ${a_char.str()}')
     // if you prefer, concatenation is always available
     mut concat := 'b'+a_char.str()+'dnews be'+a_char.str()+'rs'
-    println(concat)
+    print(concat)
     // use += to append to a string
     concat += '_appended'
-    println(concat)
+    println(', $concat')
 }
 
 fn arrays_example() {
@@ -156,15 +156,16 @@ fn arrays_example() {
 
 fn maps_example() {
     // maps function like dictionaries from many other languages
-    mut my_dict := map[string]f64 // Currently, they only accept keys that are strings
+    mut my_dict := map[string]f64 // Currently, they only accept strings as keys
     my_dict['pi'] = 3.14
     my_dict['tau'] = 6.28 // but any type can be used as a value
-    my_dict['e'] = 2.72
+    my_dict['e'] = 2.72    
     
-    println(my_dict.str())
     // if you know some/all of the key-value pairs, this alternative initialization form may come in hand
     // alt_dict := {'a' : 1.1, 'b' : 2.2, 'c' : 3.3}
     // println(alt_dict.str())
+    
+    println(my_dict.str())
 }
 
 /*
@@ -228,8 +229,12 @@ fn conditional_example() {
     println(x)
 }
 
+/*
+    The in operator is used to check if an element is a member in an array or map
+*/
 fn in_example() {
     arr := [1,2,3,5]
+    // for arrays, 'in' checks if a specified element is a value stored in it
     x := if 4 in arr {
             'There was a 4 in the array'
         }
@@ -238,26 +243,26 @@ fn in_example() {
         }
     println(x)
     
-    m := {'car' : 'bmw', 'truck' : 'chevrolet', 'plane' : 'sesna'}
-    y := if 'truck' in m {
-            'The manufacturer for trucks that you listed was '+m['truck']
+    m := {'ford' : 'mustang', 'chevrolet' : 'camaro', 'dodge' : 'challenger'}
+    // for maps, 'in' checks if a specified element is a key of the map
+    y := if 'chevrolet' in m {
+            'The chevrolet in the list is a '+m['chevrolet']
         }
         else {
-            'You did not store a manufacturer for trucks'
+            'There were no chevrolets in the list :('
         }
     println(y)
 }
 
 fn (m map[string]f64 ) str() string {
     mut result := ''
-    // V has no while loop, for loops have several forms that can be utilized    
+    // V has no while loop, for loops have several forms that can be utilized
     mut count := 0
     num_keys := m.size
-       println(num_keys)
+    println('Number of keys in the map $num_keys')
     // the basic for loop will run indefinitely
     for {
-        count += 2
-            
+        count += 2            
         println(num_keys.str())
         if count == num_keys - 1 {
             // until it reaches a break statement...or the comp runs out of resources :]
@@ -277,17 +282,76 @@ fn (m map[string]f64 ) str() string {
     }
     // the for...in... acts like the foreach of most languages
     for val in [1,2,3] {
-        result += '$val'
+        result += '$val '
     }
-    // the for key, val in... is a specialized for of the above for maps
+    result += '\n'
+    // the for key, val in... is a specialized version of the 'foreach' loop
     for key, val in m {
-        result += 'key: $key -> value: $val'
+        result += 'key: $key -> value: $val '
     }
     // this one is very handy for maps or when the index in arrays is needed
     
     return result
 }
 
+/*
+    Defer statements permit you to declare code that will run after the surrounding code has finished
+*/
+fn defer_example() {
+    mut a := f64(3)
+    mut b := f64(4)
+    // anything within this block won't run until the code after it has completed
+    defer {
+        c := math.sqrt(a+b)
+        println('The hypotenuse of the triangle is $c')
+    }
+    // this should be executed before the statements above
+    a = math.pow(a, 2)
+    b = math.pow(b, 2)
+    print('square of the length of side A is $a')
+    println(', square of the length of side B is $b')
+}
+
+struct DivisionResult {
+    result f64
+}
+
+/*
+    Option Type is the standard error handling mechanism in v
+    They are denoted with a ? on the return type
+*/
+fn divide(a, b f64) ?DivisionResult {
+    if (b != 0) {
+        return DivisionResult {result : a/b }
+    }
+    return error('Can\'t divide by zero!')
+}
+
+fn error_handling_example() {
+    x := f64(10.0)
+    y := f64(0)
+    z := f64(2.5)
+    
+    fail := divide(x, y) or {
+        // err is a special value for the 'or' clause that corresponds to the text in the error statement
+        println(err)
+        return
+    }
+    
+    /*
+    // comment the fail block and uncomment this block if you want to see the division succeed
+    succeed := divide(x, z) or {
+        println(err)
+        return
+    }
+    println(succeed.result)*/
+}
+
+
+/* 
+    Single File programs can do without a main function as an entry point
+    This is extremely useful for making cross-platform scripts
+*/
 println('$Hello $World, you are $AgeOfWorld days old.')
 println(Streets)
 println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
@@ -300,18 +364,15 @@ arrays_example()
 maps_example()
 conditional_example()
 in_example()
+defer_example()
+error_handling_example()
     
-/* Single File programs can do without a main program as an entry point
+/* 
     fn main(){
-        println('$Hello $World, you are $AgeOfWorld days old.')
-        println(Streets)
-        println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
-        println('$TestAddress2.street, $TestAddress2.city, $TestAddress2.state')
-        println(Address1.str())
-        println(Address2.str())
-        test_out_of_order_calls()
-        string_example()
-        arrays_example()
+        /* 
+            You can uncomment the main function and
+            Copy-paste the lines above it to test that they run the same
+        */
     }
 */
 
