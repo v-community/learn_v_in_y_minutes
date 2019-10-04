@@ -13,7 +13,7 @@
 
   <a name="License"></a>
   ## License
-  Currently, this project will be licensed under the MIT license. You can review the terms of license in the [LICENSE.txt](LICENSE.txt) file.
+  Currently, this project will be licensed under the MIT license. You can review the terms of license in the [LICENSE](LICENSE) file.
   
   [V]: https://vlang.io
   [V Documentation]: https://vlang.io/docs
