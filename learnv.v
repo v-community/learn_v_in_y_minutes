@@ -229,19 +229,19 @@ fn conditional_example() {
     // a shorthand to if c == `a` is v's match statement
     // it is similar to many other languages' switch statement
     match c {
-        `a`=> {
+        `a` {
             println('${c.str()} is for Apple')
             x += 'Apple'
         }
-        `b` => {
+        `b` {
             println('${c.str()} is for Banana')
             x += 'Banana'
         }
-        `c` => {
+        `c` {
             println('${c.str()} is for Cherry')
             x += 'Cherry'   
         }
-        else => {
+        else {
             println('NOPE')
         }
     }
@@ -362,7 +362,7 @@ fn divide(a, b f64) ?DivisionResult {
 fn error_handling_example() {
     x := f64(10.0)
     y := f64(0)
-    z := f64(2.5)
+    //z := f64(2.5)
     
     fail := divide(x, y) or {
         // err is a special value for the 'or' clause that corresponds to the text in the error statement
@@ -372,6 +372,7 @@ fn error_handling_example() {
         // or blocks must end with a return, break, or continue statements.
         // the last two (break and continue) must be in a for loop of some kind
     }
+	println(fail)
     
     /*
     // comment the fail block and uncomment this block if you want to see the division succeed
