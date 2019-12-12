@@ -1,5 +1,6 @@
 learnv
 *.c
 *.txt
+*.exe
 learnv-gcc
 learnv-tcc
