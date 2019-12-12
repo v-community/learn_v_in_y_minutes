@@ -25,9 +25,9 @@ import math // don't worry about this for now
     
 // program constants are defined at the module level (External to any functions) and are denoted by the 'const' structure
 const (
-    Hello = 'hello'
-    World = 'world'
-    AgeOfWorld = 42
+    hello = 'hello'
+    world = 'world'
+    age_of_world = 42
 )
 
 /* 
@@ -53,9 +53,9 @@ struct Address {
     although it is recommended to declare as many as possible in the same area 
 */
 const (
-    Streets = ['1234 Alpha Avenue', '9876 Test Lane'] 
-    TestAddress = Address {street : Streets[0], city: 'Beta', state : 'Gamma', zip : 31416}
-    TestAddress2 = Address {street : Streets[1], city: 'Exam', state : 'Quiz', zip : 62832}
+    streets = ['1234 Alpha Avenue', '9876 Test Lane'] 
+    address = Address {street : streets[0], city: 'Beta', state : 'Gamma', zip : 31416}
+    address2 = Address {street : streets[1], city: 'Exam', state : 'Quiz', zip : 62832}
 )
 
 
@@ -77,8 +77,8 @@ fn test_address2(street, city, state string, zip int) Address {
 }
     
 const (
-    Address1 = test_address('2718 Tau Dr', 'Turing', 'Leibniz', 54366)
-    Address2 = test_address2('3142 Uat Rd', 'Einstein', 'Maxwell', 62840)
+    address3 = test_address('2718 Tau Dr', 'Turing', 'Leibniz', 54366)
+    address4 = test_address2('3142 Uat Rd', 'Einstein', 'Maxwell', 62840)
 )
 
 /*
@@ -144,7 +144,7 @@ fn string_example() {
     println('The char is: ${a_char.str()}')
     
     // if you prefer, concatenation is always available
-    mut concat := 'b'+a_char.str()+'dnews be'+a_char.str()+'rs'
+    mut concat := 'b' + a_char.str() + 'dnews be' + a_char.str() + 'rs'
     print(concat)
     
     // use += to append to a string
@@ -362,7 +362,7 @@ fn divide(a, b f64) ?DivisionResult {
 fn error_handling_example() {
     x := f64(10.0)
     y := f64(0)
-    //z := f64(2.5)
+    z := f64(2.5)
     
     fail := divide(x, y) or {
         // err is a special value for the 'or' clause that corresponds to the text in the error statement
@@ -372,7 +372,6 @@ fn error_handling_example() {
         // or blocks must end with a return, break, or continue statements.
         // the last two (break and continue) must be in a for loop of some kind
     }
-	println(fail)
     
     /*
     // comment the fail block and uncomment this block if you want to see the division succeed
@@ -388,12 +387,12 @@ fn error_handling_example() {
     Single File programs can do without a main function as an entry point
     This is extremely useful for making cross-platform scripts
 */
-println('$Hello $World, you are $AgeOfWorld days old.')
-println(Streets)
-println('$TestAddress.street, $TestAddress.city, $TestAddress.state $TestAddress.zip')
-println('$TestAddress2.street, $TestAddress2.city, $TestAddress2.state')
-println(Address1.str())
-println(Address2.str())
+println('$hello $world, you are $age_of_world days old.')
+println(streets)
+println('$address.street, $address.city, $address.state $address.zip')
+println('$address2.street, $address2.city, $address2.state')
+println(address3.str())
+println(address4.str())
 test_out_of_order_calls()
 string_example()
 arrays_example()
@@ -411,4 +410,3 @@ error_handling_example()
         */
     }
 */
-
