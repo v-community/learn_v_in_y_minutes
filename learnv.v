@@ -1,10 +1,3 @@
-// single-line comments start with a //
-
-/*
-    multi-line comments start with a /*    
-    and they can be nested */
-*/
-
 /*
     V's basic data types include:
         bool                            - true/false
@@ -15,7 +8,6 @@
         rune                            - unicode code point (unicode equivalent of an ascii char)
         byteptr
         voidptr    
-
         Note from the Developer: Unlike C and Go, int is always 32 bits
 */
 
@@ -204,7 +196,7 @@ fn conditional_example() {
     b := 35  
     
     // parentheses around the condition can be useful for longer expressions
-    if (b == 2*a) {
+    if b == 2*a {
         println('b ($b) is twice the value of a ($a)')
     }  
     else if a > b { // however they are not required
@@ -292,7 +284,7 @@ fn (m map[string]f64 ) str() string {
             // until it reaches a break statement...or the comp runs out of resources :]
             break 
         }
-        else if (count == 6){
+        else if count == 6{
             // continue statements skip to the next iteration of the loop
             continue
         }   
@@ -353,7 +345,7 @@ struct DivisionResult {
     They are denoted with a ? on the return type
 */
 fn divide(a, b f64) ?DivisionResult {
-    if (b != 0) {
+    if b != 0 {
         return DivisionResult {result : a/b }
     }
     return error('Can\'t divide by zero!')
@@ -386,7 +378,6 @@ fn error_handling_example() {
 /* 
     Single File programs can do without a main function as an entry point
     This is extremely useful for making cross-platform scripts
-*/
 println('$hello $world, you are $age_of_world days old.')
 println(streets)
 println('$address.street, $address.city, $address.state $address.zip')
@@ -401,12 +392,18 @@ conditional_example()
 in_example()
 defer_example()
 error_handling_example()
+*/
     
-/* 
     fn main(){
         /* 
             You can uncomment the main function and
             Copy-paste the lines above it to test that they run the same
         */
+			println('$hello $world, you are $age_of_world days old.')
+			println(streets)
+			println('$address.street, $address.city, $address.state $address.zip')
+			println('$address2.street, $address2.city, $address2.state')
+			println(address3.str())
+			println(address4.str())
+
     }
-*/
