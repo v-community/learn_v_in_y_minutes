@@ -1,3 +1,10 @@
+// single-line comments start with a //
+
+/*
+    multi-line comments start with a /*    
+    and they can be nested */
+*/
+
 /*
     V's basic data types include:
         bool                            - true/false
