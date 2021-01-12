@@ -28,7 +28,7 @@ const (
 )
 
 /*
-PascalCase is the preferred typing method for constants
+snake_case is the preferred typing method for constants
     const's are more lenient and flexible than in other languages
     To promote the lack of global variables, complex data types can be created in the consts structure
 */
