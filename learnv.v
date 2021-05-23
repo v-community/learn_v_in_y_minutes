@@ -121,7 +121,7 @@ const (
 
 /*
 Structs have special functions called methods.
-    They are like any regular function with the addition of having a special receisver argument.
+    They are like any regular function with the addition of having a special receiver argument.
     Conventionally, the parameter name for the receiver should be short (typically a single letter)
 */
 fn (a Address) str() string {
