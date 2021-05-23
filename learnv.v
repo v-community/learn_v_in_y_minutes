@@ -199,7 +199,7 @@ fn arrays_example() {
 
 fn maps_example() {
 	// maps function like dictionaries from many other languages
-	mut my_dict := map[string]f64{} // Currently, they only accept strings as keys
+	mut my_dict := map[string]f64{} // Maps can have keys of type string, rune, integer, float or voidptr
 	my_dict['pi'] = 3.14
 	my_dict['tau'] = 6.28 // but any type can be used as a value
 	my_dict['e'] = 2.72
@@ -368,7 +368,7 @@ fn error_handling_example() {
 	fail := divide(x, y) or {
 		// err is a special value for the 'or' clause that corresponds to the text in the error statement
 		println(err)
-		// or blocks must end with a return, break, or continue statements.
+		// 'or' blocks must end with a return, break, or continue statements.
 		// the last two (break and continue) must be in a for loop of some kind
 		return
 	}
