@@ -85,11 +85,11 @@ const (
 	address4 = make_new_address('3142 Uat Rd', 'Einstein', 'Maxwell', 62840)
 )
 
-// although, you can quickly initialize structs using V's trailing struct shortcut to help in better documenting functions
+// although, you can quickly initialize structs using V's trailing struct shortcut (shown below), to help in better documenting functions, ...
 struct AddressConfig {
 pub:
 	/*
-	convention holds that structs used for this purpose are named {StructName}Config
+	... convention holds, that structs used for this purpose are named {StructName}Config
 
 		A struct's fields can have default values, so it's common to set these in the Config Struct
 	*/
@@ -109,6 +109,7 @@ fn new_address(cfg AddressConfig) &Address {
 }
 
 const (
+	// This is using the trailing struct shortcut, mentioned above
 	default_address     = new_address(AddressConfig{})
 	initialized_address = new_address(
 		street: '0987 tluafeD tS'
