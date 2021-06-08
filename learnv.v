@@ -35,13 +35,12 @@ snake_case is the preferred typing method for constants
 /*
 structs, like in C, allow you define a group of different data-types together in a single, logical type
     more advanced features will be covered shortly
-*/
-/* 
-structs store variables known as fields, which are immutable(not changeable) and private(only accesible)
-locally, use mut and pub to change their state.
+
+structs store variables known as fields, which are immutable(cannot be changed) and private(only accessible by methods of the struct) by default,
+	use mut and pub to change their state.
 */
 struct Address {
-pub:
+pub: // creates publically available fields that cannot be changed
 	street string
 	city   string
 	state  string
@@ -53,8 +52,8 @@ There can be multiple constant declarations throughout source code;
     although it is recommended to declare as many as possible in the same area
 */
 const (
-	streets  = ['1234 Alpha Avenue', '9876 Test Lane']
-	address  = Address{
+	streets = ['1234 Alpha Avenue', '9876 Test Lane']
+	address = Address{
 		street: streets[0]
 		city: 'Beta'
 		state: 'Gamma'
@@ -128,7 +127,7 @@ Structs have special functions called methods.
     Conventionally, the parameter name for the receiver should be short (typically a single letter)
 */
 fn (a Address) str() string {
-	return 'Address.str(): ${a.street}, ${a.city}, ${a.state} ${a.zip}'
+	return 'Address.str(): $a.street, $a.city, $a.state $a.zip'
 }
 
 struct Point {
@@ -177,7 +176,7 @@ fn string_example() {
 	println('The ascii value of this char is: $a_char')
 	// basic values can be interpolated directly,
 	// more advanced interpolations require ${to_be_interpolated}
-	println('The char is: ${a_char.str()}')
+	println('The char is: $a_char.str()')
 	// if you prefer, concatenation is always available
 	mut concat := 'b' + a_char.str() + 'dnews be' + a_char.str() + 'rs'
 	print(concat)
@@ -198,7 +197,7 @@ fn arrays_example() {
 	ben_10 := ['ben'].repeat(10)
 	// use .len to get the number of elements in an array
 	// use array_name[desired_index] to get the element at a specific index (indices start at 0)
-	println('There are ${ben_10.len} occurrences of ${ben_10[0]} in \n' + ben_10.str())
+	println('There are $ben_10.len occurrences of ${ben_10[0]} in \n' + ben_10.str())
 }
 
 fn maps_example() {
@@ -252,15 +251,15 @@ fn conditional_example() {
 	// it is similar to many other languages' switch statement
 	match c {
 		`a` {
-			println('${c.str()} is for Apple')
+			println('$c.str() is for Apple')
 			x += 'Apple'
 		}
 		`b` {
-			println('${c.str()} is for Banana')
+			println('$c.str() is for Banana')
 			x += 'Banana'
 		}
 		`c` {
-			println('${c.str()} is for Cherry')
+			println('$c.str() is for Cherry')
 			x += 'Cherry'
 		}
 		else {
@@ -278,7 +277,7 @@ fn in_example() {
 	// for arrays, 'in' checks if a specified element is a value stored in it
 	x := if 4 in arr { 'There was a 4 in the array' } else { 'There was not a 4 in the array' }
 	println(x)
-	m := {
+	m := map{
 		'ford':      'mustang'
 		'chevrolet': 'camaro'
 		'dodge':     'challenger'
@@ -362,7 +361,7 @@ fn divide(a f64, b f64) ?DivisionResult {
 			result: a / b
 		}
 	}
-	return error("Can\'t divide by zero!")
+	return error("Can't divide by zero!")
 }
 
 fn error_handling_example() {
@@ -413,8 +412,8 @@ fn main() {
 	*/
 	println('$hello $world, you are $age_of_world days old.')
 	println(streets)
-	println('${address.street}, ${address.city}, ${address.state} ${address.zip}')
-	println('${address2.street}, ${address2.city}, ${address2.state}')
+	println('$address.street, $address.city, $address.state $address.zip')
+	println('$address2.street, $address2.city, $address2.state')
 	println(address3.str())
 	println(address4.str())
 	println(default_address)
