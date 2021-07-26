@@ -89,7 +89,7 @@ const (
 struct AddressConfig {
 pub:
 	/*
-	... convention holds, that structs used for this purpose are named {StructName}Config
+	Convention holds that structs used for this purpose are named {StructName}Config
 
 		A struct's fields can have default values, so it's common to set these in the Config Struct
 	*/
