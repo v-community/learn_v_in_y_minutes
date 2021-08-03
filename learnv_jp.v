@@ -40,8 +40,8 @@ pub:
 
 // ソース・コード全体で複数の定数宣言が可能です。が、同じ領域でできるだけ多く宣言することをお勧めします。
 const (
-	streets  = ['1234 Alpha Avenue', '9876 Test Lane']
-	address  = Address{
+	streets = ['1234 Alpha Avenue', '9876 Test Lane']
+	address = Address{
 		street: streets[0]
 		city: 'Beta'
 		state: 'Gamma'
@@ -195,7 +195,7 @@ fn maps_example() {
 	my_dict['e'] = 2.72
 	println(my_dict.str())
 	println('alt_dictの例: キーと値のペアを、この代替初期化フォームで定義できます。')
-	alt_dict := {
+	alt_dict := map{
 		'a': 1.1
 		'b': 2.2
 		'c': 3.3
@@ -264,7 +264,7 @@ fn in_example() {
 	// 指定した要素(4)が、配列内の要素に存在するかどうかを調べます。
 	x := if 4 in arr { 'There was a 4 in the array' } else { 'There was not a 4 in the array' }
 	println(x)
-	m := {
+	m := map{
 		'ford':      'mustang'
 		'chevrolet': 'camaro'
 		'dodge':     'challenger'
@@ -347,7 +347,7 @@ fn divide(a f64, b f64) ?DivisionResult {
 			result: a / b
 		}
 	}
-	return error("Can\'t divide by zero!")
+	return error("Can't divide by zero!")
 }
 
 fn error_handling_example() {
@@ -392,8 +392,7 @@ error_handling_example()
 */
 fn main() {
 	/*
-	main関数のコメントを解除し、
-				上の行をコピー&ペーストして、同じ行が実行されることを確認できます。
+	前のコードのコメントを解除し、main関数を削除して、単一ファイルプログラムをテストできます。
 	*/
 	println('$hello $world, you are $age_of_world days old.')
 	println(streets)

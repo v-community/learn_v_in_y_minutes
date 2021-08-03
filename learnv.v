@@ -88,7 +88,7 @@ const (
 	address4 = make_new_address('3142 Uat Rd', 'Einstein', 'Maxwell', 62840)
 )
 
-// although, you can quickly initialize structs using V's trailing struct shortcut (shown below), to help in better documenting functions, ...
+// although, you can quickly initialize structs using V's trailing struct shortcut, shown below, to help in better documenting functions.
 struct AddressConfig {
 pub:
 	/*
@@ -408,8 +408,7 @@ Single File programs can do without a main function as an entry point
 */
 fn main() {
 	/*
-	You can uncomment the main function and
-            Copy-paste the lines above it to test that they run the same
+	You can uncomment the prior code and remove the main function to test Single File programs.
 	*/
 	println('$hello $world, you are $age_of_world days old.')
 	println(streets)
