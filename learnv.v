@@ -88,11 +88,11 @@ const (
 	address4 = make_new_address('3142 Uat Rd', 'Einstein', 'Maxwell', 62840)
 )
 
-// although, you can quickly initialize structs using V's trailing struct shortcut to help in better documenting functions
+// although, you can quickly initialize structs using V's trailing struct shortcut (shown below), to help in better documenting functions, ...
 struct AddressConfig {
 pub:
 	/*
-	convention holds that structs used for this purpose are named {StructName}Config
+	Convention holds that structs used for this purpose are named {StructName}Config
 
 		A struct's fields can have default values, so it's common to set these in the Config Struct
 	*/
@@ -112,6 +112,7 @@ fn new_address(cfg AddressConfig) &Address {
 }
 
 const (
+	// This is using the trailing struct shortcut, mentioned above
 	default_address     = new_address(AddressConfig{})
 	initialized_address = new_address(
 		street: '0987 tluafeD tS'
@@ -123,7 +124,7 @@ const (
 
 /*
 Structs have special functions called methods.
-    They are like any regular function with the addition of having a special receisver argument.
+    They are like any regular function with the addition of having a special receiver argument.
     Conventionally, the parameter name for the receiver should be short (typically a single letter)
 */
 fn (a Address) str() string {
@@ -202,7 +203,7 @@ fn arrays_example() {
 
 fn maps_example() {
 	// maps function like dictionaries from many other languages
-	mut my_dict := map[string]f64{} // Currently, they only accept strings as keys
+	mut my_dict := map[string]f64{} // Maps can have keys of type string, rune, integer, float or voidptr
 	my_dict['pi'] = 3.14
 	my_dict['tau'] = 6.28 // but any type can be used as a value
 	my_dict['e'] = 2.72
@@ -371,7 +372,7 @@ fn error_handling_example() {
 	fail := divide(x, y) or {
 		// err is a special value for the 'or' clause that corresponds to the text in the error statement
 		println(err)
-		// or blocks must end with a return, break, or continue statements.
+		// 'or' blocks must end with a return, break, or continue statements.
 		// the last two (break and continue) must be in a for loop of some kind
 		return
 	}
